@@ -22,6 +22,7 @@ class NewDeck extends React.Component {
       this.props.actions.addDeckTitle({title:this.state.title, questions:[]})
       this.setState({title:''})
       this.setState({error:''})
+      this.props.navigation.navigate('Deck', {title: this.state.title})
     } 
   }
 
@@ -46,7 +47,7 @@ class NewDeck extends React.Component {
   }
 }
 
-mapStateToProps =state => ({ decks: state });
+mapStateToProps = state => ({ decks: state });
 
 mapDispatchToProps = dispatch => ({ 
   actions:{

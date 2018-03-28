@@ -9,6 +9,7 @@ import {
   UIManager
 } from 'react-native';
 import { Card, Button } from 'react-native-elements';
+import { clearLocalNotification, setLocalNotification } from '../utils/tools'
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SWIPE_THRESHOLD = 0.25 * SCREEN_WIDTH;
@@ -19,7 +20,6 @@ class Questions extends Component {
     super(props);
     
     this.handlePress = this.handlePress.bind(this);
-    this.handleNavigationToQuiz = this.handleNavigationToQuiz.bind(this);
 
     const position = new Animated.ValueXY();
     const panResponder = PanResponder.create({
@@ -90,8 +90,7 @@ class Questions extends Component {
     };
   }
 
-  renderNoMoreCards(correct, incorrect) {
-    console.log(this.props);
+  renderNoMoreCards() {
     return (
       <Card title="Your score!">
         <Text style={{ marginBottom: 10 }}>
@@ -102,17 +101,13 @@ class Questions extends Component {
         </Text>
         <Button
           backgroundColor="#03A9F4"
-          title="Start Over?"
-          onPress = {() => this.props.navigation.navigate('Quiz', { title: this.props.deckTitle })}
+          title="Back to Deck"
+          onPress = {() => this.props.navigation.navigate('Deck', { title: this.props.deckTitle })}
         />
       </Card>
     );
   }
-
-  handleNavigationToQuiz(){
-    this.props.navigation.navigate('Quiz', { title: this.props.deckTitle })
-  }
-
+  
   renderCard(item) {
     return (
       <Card
@@ -136,17 +131,18 @@ class Questions extends Component {
       </Card>
     );
   }
-
+  
   handlePress(){
     this.setState( prevState => ({showQuestion: !prevState.showQuestion}))
     console.log(this.state.showQuestion);
   }
-
+  
   renderCards() {
     if (this.state.index >= this.props.data.length) {
-      return this.renderNoMoreCards(this.state.correct, this.state.incorrect);
+      clearLocalNotification().then(setLocalNotification)
+      return this.renderNoMoreCards();
     }
-
+    
     return this.props.data.map((item, i) => {
       if (i < this.state.index) { return null; }
 
