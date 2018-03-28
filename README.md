@@ -1,5 +1,5 @@
 #Mobile Flashcards
-> Mobile Flashcards: React Native Mobile Flashcards App
+> Mobile Flashcards: Android Flashcards App
 
 "This project encompasses the fundamental aspects of building a native application including handling infinite lists, routing, and user input."
 
@@ -16,7 +16,7 @@ or
 npm install
 npm start
 ```
-- testes on Android device.
+- tested on Android device.
 
 #### Future improvements
 - Swipe list item to edit / delete card decks
