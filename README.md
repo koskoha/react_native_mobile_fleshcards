@@ -16,7 +16,7 @@ or
 npm install
 npm start
 ```
-
+- testes on Android device.
 
 #### Future improvements
 - Swipe list item to edit / delete card decks
